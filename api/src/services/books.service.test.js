@@ -1,25 +1,7 @@
+const { generateManyBook } = require('../fakes/book.fake');
 const BooksService = require('./books.service');
 
-const fakeBooks = [
-  {
-    _id: '62b11a8a1946f8e5c2e20698',
-    name: 'harry popoter',
-  },
-  {
-    _id: '62b11a8a1946f8e5c2e20698',
-    name: 'harry popoter y la piedra filosofal',
-  },
-];
-
 const mockGetAll = jest.fn();
-
-/*
-const MongoLibStub = {
-  getAll: spyGetAll,
-  create: () => {},
-};
- */
-
 jest.mock(
   '../lib/mongo.lib',
   () => jest.fn().mockImplementation(() => ({
@@ -38,12 +20,12 @@ describe('Test for BooksService', () => {
   describe('Test for getBooks', () => {
     test('Should return a list books', async () => {
       // Arrange
+      const fakeBooks = generateManyBook(40);
       mockGetAll.mockResolvedValue(fakeBooks);
       // Act
       const books = await service.getBooks({});
-      console.log(books);
       // Assert
-      expect(books.length).toEqual(2);
+      expect(books.length).toEqual(fakeBooks.length);
       expect(mockGetAll).toHaveBeenCalled();
       expect(mockGetAll).toHaveBeenCalledTimes(1);
       expect(mockGetAll).toHaveBeenCalledWith('books', {});
@@ -51,17 +33,13 @@ describe('Test for BooksService', () => {
 
     test('Should return a list books', async () => {
       // Arrange
-      mockGetAll.mockResolvedValue([
-        {
-          _id: '62b11a8a1946f8e5c2e20698',
-          name: 'harry popoter y la piedra filosofal',
-        },
-      ]);
+      const fakeBooks = generateManyBook(4);
+      mockGetAll.mockResolvedValue(fakeBooks);
       // Act
       const books = await service.getBooks();
       console.log(books);
       // Assert
-      expect(books.length).toEqual(1);
+      expect(books[0].name).toEqual(fakeBooks[0].name);
     });
   });
 });
