@@ -7,7 +7,7 @@ const generateOneBook = () => ({
 });
 
 const generateManyBook = (size) => {
-  const limit = size ?? 0;
+  const limit = size ?? 10;
   const fakeBooks = [];
   for (let i = 0; i < limit; i += 1) {
     fakeBooks.push(generateOneBook());
