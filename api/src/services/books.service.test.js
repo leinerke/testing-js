@@ -2,7 +2,7 @@ const { generateManyBook } = require('../fakes/book.fake');
 const BooksService = require('./books.service');
 
 const mockGetAll = jest.fn();
-jest.mock('../src/lib/mongo.lib', () => jest.fn().mockImplementation(() => ({
+jest.mock('../lib/mongo.lib', () => jest.fn().mockImplementation(() => ({
   getAll: mockGetAll,
   create: () => {},
 })));

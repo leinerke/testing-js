@@ -6,11 +6,9 @@ on:
     paths:
       - "./api/**"
       - ".github/workflows/api-ci.yml"
-
 defaults:
   run:
     working-directory: ./api
-
 jobs:
   unit-test:
     runs-on: ubuntu-latest
